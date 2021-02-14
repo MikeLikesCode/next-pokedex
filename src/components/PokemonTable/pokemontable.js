@@ -20,6 +20,23 @@ const orderBy = (pokemon, value, direction) => {
   return pokemon;
 };
 
+const filterBy = (pokemon, value) => {
+  var active = value;
+  let filteredPokemon = null;
+  
+  if( active !== 'none'){
+    filteredPokemon = pokemon.filter(pokemon => {
+      return pokemon.types.some(type => active.includes(type.type.name));
+    })
+  }
+  else{
+    filteredPokemon = pokemon;
+  }
+
+  console.log(filteredPokemon);  
+  return filteredPokemon
+}
+
 export default function PokemonTable({ data }) {
   const [pokemon, setPokemon] = useState([]);
   const [order, setOrder] = useState("A-Z");
@@ -42,7 +59,8 @@ export default function PokemonTable({ data }) {
     setOrder(e.target.value);
   };
 
-  const filteredPokemon = orderBy(pokemon, "name", order);
+  const orderedPokemon = orderBy(pokemon, "name", order);
+  const filteredPokemon = filterBy(orderedPokemon,'fire')
   return (
     <div>
       <div className={styles.container}>
