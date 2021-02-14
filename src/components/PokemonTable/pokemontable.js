@@ -23,19 +23,18 @@ const orderBy = (pokemon, value, direction) => {
 const filterBy = (pokemon, value) => {
   var active = value;
   let filteredPokemon = null;
-  
-  if( active !== 'none'){
-    filteredPokemon = pokemon.filter(pokemon => {
-      return pokemon.types.some(type => active.includes(type.type.name));
-    })
-  }
-  else{
+
+  if (active !== "none") {
+    filteredPokemon = pokemon.filter((pokemon) => {
+      return pokemon.types.some((type) => active.includes(type.type.name));
+    });
+  } else {
     filteredPokemon = pokemon;
   }
 
-  console.log(filteredPokemon);  
-  return filteredPokemon
-}
+  console.log(filteredPokemon);
+  return filteredPokemon;
+};
 
 export default function PokemonTable({ data }) {
   const [pokemon, setPokemon] = useState([]);
@@ -62,10 +61,10 @@ export default function PokemonTable({ data }) {
 
   const changeFilter = (e) => {
     setFilter(e.target.value);
-  }
+  };
 
   const orderedPokemon = orderBy(pokemon, "name", order);
-  const filteredPokemon = filterBy(orderedPokemon, filter)
+  const filteredPokemon = filterBy(orderedPokemon, filter);
   return (
     <div>
       <div className={styles.container}>
@@ -74,17 +73,41 @@ export default function PokemonTable({ data }) {
         <div className={styles.heading}>
           <div className={styles.form}>
             <label htmlFor="order">Sort ({order})</label>
-            <select className={styles.heading_name} onChange={changeDirection} id="order">
+            <select
+              className={styles.heading_name}
+              onChange={changeDirection}
+              id="order"
+            >
               <option value="A-Z">A-Z</option>
               <option value="Z-A">Z-A</option>
             </select>
           </div>
           <div className={styles.form}>
             <label htmlFor="type">Type</label>
-            <select className={styles.heading_type} onChange={changeFilter} id="type">
+            <select
+              className={styles.heading_type}
+              onChange={changeFilter}
+              id="type"
+            >
               <option value="none">Type</option>
               <option value="fire">Fire</option>
               <option value="water">Water</option>
+              <option value="fairy">Fairy</option>
+              <option value="steel">Steel</option>
+              <option value="dark">Dark</option>
+              <option value="dragon">Dragon</option>
+              <option value="ghost">Ghost</option>
+              <option value="rock">Rock</option>
+              <option value="bug">Bug</option>
+              <option value="psychic">Psychic</option>
+              <option value="flying">Flying</option>
+              <option value="ground">Ground</option>
+              <option value="poison">Poison</option>
+              <option value="fighting">Fighting</option>
+              <option value="ice">Ice</option>
+              <option value="grass">Grass</option>
+              <option value="electric">Electric</option>
+              <option value="normal">Normal</option>
             </select>
           </div>
           <div className={styles.form}>
