@@ -40,6 +40,7 @@ const filterBy = (pokemon, value) => {
 export default function PokemonTable({ data }) {
   const [pokemon, setPokemon] = useState([]);
   const [order, setOrder] = useState("A-Z");
+  const [filter, setFilter] = useState("none");
 
   const getPokemon = async () => {
     const p = await Promise.all(
@@ -59,8 +60,12 @@ export default function PokemonTable({ data }) {
     setOrder(e.target.value);
   };
 
+  const changeFilter = (e) => {
+    setFilter(e.target.value);
+  }
+
   const orderedPokemon = orderBy(pokemon, "name", order);
-  const filteredPokemon = filterBy(orderedPokemon,'fire')
+  const filteredPokemon = filterBy(orderedPokemon, filter)
   return (
     <div>
       <div className={styles.container}>
@@ -76,9 +81,10 @@ export default function PokemonTable({ data }) {
           </div>
           <div className={styles.form}>
             <label htmlFor="type">Type</label>
-            <select className={styles.heading_type} id="type">
-              <option value="type">Type</option>
+            <select className={styles.heading_type} onChange={changeFilter} id="type">
+              <option value="none">Type</option>
               <option value="fire">Fire</option>
+              <option value="water">Water</option>
             </select>
           </div>
           <div className={styles.form}>
