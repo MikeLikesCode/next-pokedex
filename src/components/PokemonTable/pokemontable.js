@@ -32,7 +32,6 @@ const filterBy = (pokemon, value) => {
     filteredPokemon = pokemon;
   }
 
-  console.log(filteredPokemon);
   return filteredPokemon;
 };
 
