@@ -1,38 +1,12 @@
 import { useEffect, useState } from "react";
 import styles from "./pokemontable.module.css";
-import { filterType } from "./Filters/filter";
+import { filterType, orderBy, filterBy } from "./Filters/index";
 
 const fetchPokemon = async (p) => {
   const res = await fetch(p.url);
   const pokemon = await res.json();
 
   return pokemon;
-};
-
-const orderBy = (pokemon, value, direction) => {
-  if (direction === "A-Z") {
-    return [...pokemon].sort((a, b) => (a[value] > b[value] ? 1 : -1));
-  }
-  if (direction === "Z-A") {
-    return [...pokemon].sort((a, b) => (a[value] > b[value] ? -1 : 1));
-  }
-
-  return pokemon;
-};
-
-const filterBy = (pokemon, value) => {
-  var active = value;
-  let filteredPokemon = null;
-
-  if (active !== "none") {
-    filteredPokemon = pokemon.filter((pokemon) => {
-      return pokemon.types.some((type) => active.includes(type.type.name));
-    });
-  } else {
-    filteredPokemon = pokemon;
-  }
-
-  return filteredPokemon;
 };
 
 export default function PokemonTable({ data }) {

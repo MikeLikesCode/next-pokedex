@@ -1,4 +1,30 @@
-import styles from "./filter.module.css";
+import styles from "./filters.module.css";
+
+export const filterBy = (pokemon, value) => {
+  var active = value;
+  let filteredPokemon = null;
+
+  if (active !== "none") {
+    filteredPokemon = pokemon.filter((pokemon) => {
+      return pokemon.types.some((type) => active.includes(type.type.name));
+    });
+  } else {
+    filteredPokemon = pokemon;
+  }
+
+  return filteredPokemon;
+};
+
+export const orderBy = (pokemon, value, direction) => {
+  if (direction === "A-Z") {
+    return [...pokemon].sort((a, b) => (a[value] > b[value] ? 1 : -1));
+  }
+  if (direction === "Z-A") {
+    return [...pokemon].sort((a, b) => (a[value] > b[value] ? -1 : 1));
+  }
+
+  return pokemon;
+};
 
 export const filterType = (type) => {
   switch (type) {
