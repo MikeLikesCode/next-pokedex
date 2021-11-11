@@ -35,11 +35,6 @@ export default function Home({ data }) {
       </div>
       
       <PokemonTable data={data} />
-
-      <div className={styles.button}>
-          Load More
-      </div>
-    
     </>
   );
 }
