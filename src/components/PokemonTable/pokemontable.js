@@ -83,22 +83,6 @@ export default function PokemonTable({ data }) {
               <option value="normal">Normal</option>
             </select>
           </div>
-          <div className={styles.form}>
-            <label htmlFor="generation">Generation</label>
-            <select className={styles.heading_generation} id="generation">
-              <option value="type">Generation</option>
-              <option value="legendary">Gen 1</option>
-              <option value="mythical">Gen 2</option>
-            </select>
-          </div>
-          <div className={styles.form}>
-            <label htmlFor="rarity">Rarity</label>
-            <select className={styles.heading_rarity} id="rarity">
-              <option value="type">Rarity</option>
-              <option value="legendary">Legendary</option>
-              <option value="mythical">Mythical</option>
-            </select>
-          </div>
         </div>
         <div className={styles.column}>
           {filteredPokemon.map((info) => (

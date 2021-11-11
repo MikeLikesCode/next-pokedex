@@ -18,8 +18,8 @@ padding: 4vh 0px;
 
 .headline{
     color: var(--text-color);
-    font-size: 4rem;
-    line-height: 75px;
+    font-size: 3rem;
+    line-height: 55px;
     font-weight: 500;
     margin-top:20px;
     margin-bottom:15px;
@@ -31,6 +31,7 @@ padding: 4vh 0px;
     margin-top:20px;
     margin-bottom:5px;
     font-size:300;
+    font-weight: 200;
 }
 
 

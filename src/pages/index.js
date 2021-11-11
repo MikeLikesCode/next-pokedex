@@ -1,11 +1,12 @@
 import Header from "../components/Header/header";
-import PokemonTable from "../components/PokemonTable/pokemontable";
+import PokemonTable from "../components/PokemonTable/pokemonTable";
 import styles from "../styles/Home.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowCircleDown,
   faArrowRight,
 } from "@fortawesome/free-solid-svg-icons";
+import cacheData from 'memory-cache'
 
 export default function Home({ data }) { 
 
@@ -44,8 +45,19 @@ export default function Home({ data }) {
 }
 
 export const getStaticProps = async () => {
-  const res = await fetch("https://pokeapi.co/api/v2/pokemon?limit=1050");
-  const data = await res.json();
+
+  let data = null;
+  data = cacheData.get("https://pokeapi.co/api/v2/pokemon?limit=1050");
+  if (data){
+    data = data
+  }
+  else{
+    const hours = 24;
+    const res = await fetch('https://pokeapi.co/api/v2/pokemon?limit=1050');
+    data = await res.json();
+    cacheData.put('https://pokeapi.co/api/v2/pokemon?limit=1050', data, hours * 1000 * 60 * 60);
+    data = data
+  }
 
   return {
     props: {
