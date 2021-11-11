@@ -1,5 +1,5 @@
 import Header from "../components/Header/header";
-import PokemonTable from "../components/PokemonTable/pokemonTable";
+import PokemonTable from "../components/PokemonTable/pokemontable";
 import styles from "../styles/Home.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
