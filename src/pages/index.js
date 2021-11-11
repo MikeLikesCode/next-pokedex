@@ -7,8 +7,54 @@ import {
   faArrowRight,
 } from "@fortawesome/free-solid-svg-icons";
 import cacheData from 'memory-cache'
+import { useEffect, useState } from 'react';
 
-export default function Home({ data }) { 
+export default function Home({ data }) {
+
+  const [pokemon, setPokemon] = useState([]);
+  const [query, setQuery] = useState("");
+
+  const fetchPokemon = async (p) => {
+
+    let pokemon = null;
+    pokemon = cacheData.get(p.url);
+    if (pokemon) {
+      pokemon = pokemon
+    }
+    else {
+      const hours = 24;
+      const res = await fetch(p.url);
+      pokemon = await res.json();
+      cacheData.put(p.url, data, hours * 1000 * 60 * 60);
+    }
+
+    return pokemon;
+  };
+
+  const getPokemon = async () => {
+
+    const pokemons = await Promise.all(
+      data.results.map(async (url) => {
+        return await fetchPokemon(url);
+      })
+    );
+
+    if (pokemons) {
+      setPokemon(await pokemons);
+    }
+    else {
+      setPokemon([])
+    }
+
+  };
+
+  useEffect(() => {
+    getPokemon();
+  }, []);
+
+  const searchPokemon = (q) => {
+    setQuery(q);
+  }
 
   return (
     <>
@@ -20,10 +66,9 @@ export default function Home({ data }) {
               Search up Pokémon from your favourite generation
             </div>
             <form>
-              <input placeholder="Search up a specific pokemon name" />
-              <button>
-                <FontAwesomeIcon icon={faArrowRight} />
-              </button>
+              <input onChange={(e) => {
+                searchPokemon(e.target.value.toLowerCase());
+              }} placeholder="Search up a specific pokemon name" />
             </form>
 
             <p>Check out all Pokémon with filters down below</p>
@@ -33,8 +78,15 @@ export default function Home({ data }) {
           </div>
         </div>
       </div>
-      
-      <PokemonTable data={data} />
+
+      <PokemonTable data={pokemon.filter((pokemon) => {
+              if (query == ""){
+                return pokemon
+              }
+              else if (pokemon.name.toLowerCase().includes(query)) {
+                return pokemon
+              }
+            })} />
     </>
   );
 }
@@ -43,10 +95,10 @@ export const getStaticProps = async () => {
 
   let data = null;
   data = cacheData.get("https://pokeapi.co/api/v2/pokemon?limit=1050");
-  if (data){
+  if (data) {
     data = data
   }
-  else{
+  else {
     const hours = 24;
     const res = await fetch('https://pokeapi.co/api/v2/pokemon?limit=1050');
     data = await res.json();

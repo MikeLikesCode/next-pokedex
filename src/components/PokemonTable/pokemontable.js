@@ -1,32 +1,11 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styles from "./pokemontable.module.css";
 import { filterType, orderBy, filterBy } from "./Filters/index";
 
-const fetchPokemon = async (p) => {
-  const res = await fetch(p.url);
-  const pokemon = await res.json();
-
-  return pokemon;
-};
 
 export default function PokemonTable({ data }) {
-  const [pokemon, setPokemon] = useState([]);
   const [order, setOrder] = useState("A-Z");
   const [filter, setFilter] = useState("none");
-
-  const getPokemon = async () => {
-    const p = await Promise.all(
-      data.results.map(async (url) => {
-        return await fetchPokemon(url);
-      })
-    );
-
-    setPokemon(await p);
-  };
-
-  useEffect(() => {
-    getPokemon();
-  }, []);
 
   const changeDirection = (e) => {
     setOrder(e.target.value);
@@ -36,7 +15,7 @@ export default function PokemonTable({ data }) {
     setFilter(e.target.value);
   };
 
-  const orderedPokemon = orderBy(pokemon, "name", order);
+  const orderedPokemon = orderBy(data, "name", order);
   const filteredPokemon = filterBy(orderedPokemon, filter);
   return (
     <div>
