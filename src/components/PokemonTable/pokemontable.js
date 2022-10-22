@@ -17,6 +17,7 @@ export default function PokemonTable({ data }) {
 
   const orderedPokemon = orderBy(data, "name", order);
   const filteredPokemon = filterBy(orderedPokemon, filter);
+
   return (
     <div>
       <div className={styles.container}>
@@ -41,7 +42,7 @@ export default function PokemonTable({ data }) {
               onChange={changeFilter}
               id="type"
             >
-              <option value="none">Type</option>
+              <option value="none">All</option>
               <option value="fire">Fire</option>
               <option value="water">Water</option>
               <option value="fairy">Fairy</option>
@@ -69,13 +70,12 @@ export default function PokemonTable({ data }) {
               <div className={styles.itemTop}>
                 <div className={styles.name}>{info.name} </div>
                 <div className={styles.types}>
-                  {" "}
-                  {info.types.map(({ type }) => filterType(type.name))}
+                  {info.pokemon_v2_pokemontypes.map(({ pokemon_v2_type: type }) => filterType(type.name))}
                 </div>
               </div>
 
               <div className={styles.sprites}>
-                <img src={info.sprites.front_default} alt={info.name} />
+                <img src={JSON.parse(info.pokemon_v2_pokemonsprites[0].sprites).front_default} alt={info.name} />
               </div>
             </div>
           ))}
