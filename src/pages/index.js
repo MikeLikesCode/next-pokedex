@@ -25,7 +25,9 @@ const Main = ({ pokemon }) => {
           <div className={styles.headline}>
             Search up Pokémon from your favorite generation
           </div>
-          <form>
+          <form onSubmit={(e) => {
+            e.preventDefault()
+          }}>
             <input
               onChange={(e) => {
                 searchPokemon(e.target.value.toLowerCase())
