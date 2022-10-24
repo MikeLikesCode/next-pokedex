@@ -1,22 +1,23 @@
-import { useState } from "react";
-import styles from "./pokemontable.module.css";
-import { filterType, orderBy, filterBy } from "./Filters/index";
-
+import { useState } from 'react'
+import styles from './pokemontable.module.css'
+import { filterType, orderBy, filterBy } from './Filters/index'
+import { useRouter } from 'next/router'
 
 export default function PokemonTable({ data }) {
-  const [order, setOrder] = useState("A-Z");
-  const [filter, setFilter] = useState("none");
+  const router = useRouter()
+  const [order, setOrder] = useState('A-Z')
+  const [filter, setFilter] = useState('none')
 
   const changeDirection = (e) => {
-    setOrder(e.target.value);
-  };
+    setOrder(e.target.value)
+  }
 
   const changeFilter = (e) => {
-    setFilter(e.target.value);
-  };
+    setFilter(e.target.value)
+  }
 
-  const orderedPokemon = orderBy(data, "name", order);
-  const filteredPokemon = filterBy(orderedPokemon, filter);
+  const orderedPokemon = orderBy(data, 'name', order)
+  const filteredPokemon = filterBy(orderedPokemon, filter)
 
   return (
     <div>
@@ -66,21 +67,35 @@ export default function PokemonTable({ data }) {
         </div>
         <div className={styles.column}>
           {filteredPokemon.map((info) => (
-            <div key={info.name} className={styles.item}>
+            <div
+              onClick={() => {
+                router.push(`/pokemon/${info.pokemon_species_id}`)
+              }}
+              key={info.name}
+              className={styles.item}
+            >
               <div className={styles.itemTop}>
                 <div className={styles.name}>{info.name} </div>
                 <div className={styles.types}>
-                  {info.pokemon_v2_pokemontypes.map(({ pokemon_v2_type: type }) => filterType(type.name))}
+                  {info.pokemon_v2_pokemontypes.map(({ pokemon_v2_type: type }) =>
+                    filterType(type.name)
+                  )}
                 </div>
               </div>
 
               <div className={styles.sprites}>
-                <img src={JSON.parse(info.pokemon_v2_pokemonsprites[0].sprites).front_default} alt={info.name} />
+                <img
+                  src={
+                    JSON.parse(info.pokemon_v2_pokemonsprites[0].sprites)
+                      .front_default
+                  }
+                  alt={info.name}
+                />
               </div>
             </div>
           ))}
         </div>
       </div>
     </div>
-  );
+  )
 }
