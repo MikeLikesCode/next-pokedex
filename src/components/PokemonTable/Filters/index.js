@@ -1,5 +1,3 @@
-import styles from "./filters.module.css";
-
 export const filterBy = (pokemon, value) => {
   var active = value;
   let filteredPokemon = null;
@@ -31,41 +29,41 @@ export const orderBy = (pokemon, value, direction) => {
 export const filterType = (type) => {
   switch (type) {
     case "fairy":
-      return <div key={type} className={styles.fairy}>{type}</div>;
+      return <div key={type} className="bg-[#dea5de] py-[2px] px-[10px] rounded-[25px]">{type}</div>;
     case "steel":
-      return <div key={type} className={styles.steel}>{type}</div>;
+      return <div key={type} className="bg-[#b8b8d0] py-[2px] px-[10px] rounded-[25px]">{type}</div>;
     case "dark":
-      return <div key={type} className={styles.dark}>{type}</div>;
+      return <div key={type} className="bg-[#705848] py-[2px] px-[10px] rounded-[25px]">{type}</div>;
     case "dragon":
-      return <div key={type} className={styles.dragon}>{type}</div>;
+      return <div key={type} className="bg-[#7038f8] py-[2px] px-[10px] rounded-[25px]">{type}</div>;
     case "ghost":
-      return <div key={type} className={styles.ghost}>{type}</div>;
+      return <div key={type} className="bg-[#705898] py-[2px] px-[10px] rounded-[25px]">{type}</div>;
     case "rock":
-      return <div key={type} className={styles.rock}>{type}</div>;
+      return <div key={type} className="bg-[#b8a038] py-[2px] px-[10px] rounded-[25px]">{type}</div>;
     case "bug":
-      return <div key={type} className={styles.bug}>{type}</div>;
+      return <div key={type} className="bg-[#b8a038] py-[2px] px-[10px] rounded-[25px]">{type}</div>;
     case "psychic":
-      return <div key={type} className={styles.psychic}>{type}</div>;
+      return <div key={type} className="bg-[#f85888] py-[2px] px-[10px] rounded-[25px]">{type}</div>;
     case "flying":
-      return <div key={type} className={styles.flying}>{type}</div>;
+      return <div key={type} className="bg-[#a890f0] py-[2px] px-[10px] rounded-[25px]">{type}</div>;
     case "ground":
-      return <div key={type} className={styles.ground}>{type}</div>;
+      return <div key={type} className="bg-[#e0c068] py-[2px] px-[10px] rounded-[25px]">{type}</div>;
     case "poison":
-      return <div key={type} className={styles.poison}>{type}</div>;
+      return <div key={type} className="bg-[#a040a0] py-[2px] px-[10px] rounded-[25px]">{type}</div>;
     case "fighting":
-      return <div key={type} className={styles.fighting}>{type}</div>;
+      return <div key={type} className="bg-[#c03028] py-[2px] px-[10px] rounded-[25px]">{type}</div>;
     case "ice":
-      return <div key={type} className={styles.ice}>{type}</div>;
+      return <div key={type} className="bg-[#98d8d8] py-[2px] px-[10px] rounded-[25px]">{type}</div>;
     case "grass":
-      return <div key={type} className={styles.grass}>{type}</div>;
+      return <div key={type} className="bg-[#78c850] py-[2px] px-[10px] rounded-[25px]">{type}</div>;
     case "electric":
-      return <div key={type} className={styles.electric}>{type}</div>;
+      return <div key={type} className="bg-[#f8d030] py-[2px] px-[10px] rounded-[25px]">{type}</div>;
     case "water":
-      return <div key={type} className={styles.water}>{type}</div>;
+      return <div key={type} className="bg-[#6890f0] py-[2px] px-[10px] rounded-[25px]">{type}</div>;
     case "fire":
-      return <div key={type} className={styles.fire}>{type}</div>;
+      return <div key={type} className="bg-[#f08030] py-[2px] px-[10px] rounded-[25px]">{type}</div>;
     case "normal":
-      return <div key={type} className={styles.normal}>{type}</div>;
+      return <div key={type} className="bg-[#a8a878] py-[2px] px-[10px] rounded-[25px]">{type}</div>;
     default:
       return <div></div>;
   }

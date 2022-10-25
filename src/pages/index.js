@@ -1,6 +1,5 @@
 import Header from '../components/Header/header'
 import PokemonTable from '../components/PokemonTable/PokemonTable'
-import styles from '../styles/Home.module.css'
 import { gql } from '@apollo/client'
 import client from '../providers/ApolloClient'
 import { useState } from 'react'
@@ -18,14 +17,14 @@ const Main = ({ pokemon }) => {
   currentPokemon = searchPokemonByName(currentPokemon, query)
 
   return (
-    <div className={styles.container}>
-      <div className={styles.overlay}>
+    <div>
+      <div className='px-20 py-10 flex flex-col items-center text-center bg-[#364156]'>
         <Header title="Next.js Pokidex" />
-        <div className={styles.content}>
-          <div className={styles.headline}>
+        <div>
+          <h1 className='text-4xl text-white my-6'>
             Search up Pokémon from your favorite generation
-          </div>
-          <form onSubmit={(e) => {
+          </h1>
+          <form className='my-8' onSubmit={(e) => {
             e.preventDefault()
           }}>
             <input
@@ -36,14 +35,16 @@ const Main = ({ pokemon }) => {
             />
           </form>
 
-          <p>Check out all Pokémon with filters down below</p>
-          <div className={styles.arrowDown}>
+          <p className='text-2xl text-white font-light'>Check out all Pokémon with filters down below</p>
+          <div>
             {/* <FontAwesomeIcon icon={faArrowCircleDown} /> */}
           </div>
         </div>
       </div>
 
-      <PokemonTable data={currentPokemon} />
+      <div className='py-10'>
+        <PokemonTable data={currentPokemon} />
+      </div>
     </div>
   )
 }
@@ -56,10 +57,6 @@ export async function getStaticProps() {
       query fetchAllPokemonNamesAndSprites {
         pokemon_v2_pokemon{
           name
-          base_experience
-          height
-          is_default
-          order
           pokemon_species_id
           pokemon_v2_pokemonsprites {
             sprites

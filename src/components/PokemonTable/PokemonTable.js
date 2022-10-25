@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import styles from './pokemontable.module.css'
-import { filterType, orderBy, filterBy } from './Filters/index'
+import { orderBy, filterBy } from './Filters/index'
 import { useRouter } from 'next/router'
+import PokemonCard from '../PokemonCard/Card'
 
 export default function PokemonTable({ data }) {
-  const router = useRouter()
   const [order, setOrder] = useState('A-Z')
   const [filter, setFilter] = useState('none')
 
@@ -67,32 +67,7 @@ export default function PokemonTable({ data }) {
         </div>
         <div className={styles.column}>
           {filteredPokemon.map((info) => (
-            <div
-              onClick={() => {
-                router.push(`/pokemon/${info.pokemon_species_id}`)
-              }}
-              key={info.name}
-              className={styles.item}
-            >
-              <div className={styles.itemTop}>
-                <div className={styles.name}>{info.name} </div>
-                <div className={styles.types}>
-                  {info.pokemon_v2_pokemontypes.map(({ pokemon_v2_type: type }) =>
-                    filterType(type.name)
-                  )}
-                </div>
-              </div>
-
-              <div className={styles.sprites}>
-                <img
-                  src={
-                    JSON.parse(info.pokemon_v2_pokemonsprites[0].sprites)
-                      .front_default
-                  }
-                  alt={info.name}
-                />
-              </div>
-            </div>
+            <PokemonCard info={info} />
           ))}
         </div>
       </div>
