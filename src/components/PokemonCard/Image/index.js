@@ -1,17 +1,19 @@
+import Image from "next/image";
+
 export default function PokemonImage({ images, name }) {
 
   const parsedImages = JSON.parse(images)
   let default_image = parsedImages.front_default;
 
-  // Add some handling to check if the pokemon is male or female and find images for that
-
-  // This also applies for GMAX or any other variant versions of pokemon ("Starter", "World-Cap")
-
+  if (!default_image) {
+    default_image = 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png'
+  }
 
   return (
     <div>
-      <img
-        className="w-[96px]"
+      <Image
+        width={95}
+        height={95}
         src={
           default_image
         }
