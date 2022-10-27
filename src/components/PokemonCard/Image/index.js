@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-export default function PokemonImage({ images, name }) {
+export default function PokemonImage({ images, name, width = 95, height = 95 }) {
 
   const parsedImages = JSON.parse(images)
   let default_image = parsedImages.front_default;
@@ -12,8 +12,8 @@ export default function PokemonImage({ images, name }) {
   return (
     <div>
       <Image
-        width={95}
-        height={95}
+        width={width}
+        height={height}
         src={
           default_image
         }
